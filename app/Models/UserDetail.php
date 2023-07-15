@@ -10,6 +10,9 @@ class UserDetail extends Model
 {
     use SoftDeletes, HasFactory;
 
+    protected $table = 'user_details';
+    protected $primaryKey = 'uuid';
+
     protected $fillable = [
         'uuid',
         'user_uuid',
