@@ -4,18 +4,21 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class product extends Model
+class Category extends Model
 {
     use SoftDeletes, HasFactory;
-    protected $table = 'products';
+    protected $table = 'categories';
     protected $primaryKey = 'uuid';
+
     protected $fillable = [
-        'category_id',
         'name',
-        'price',
-        'description',
-        'quantity',
     ];
+
+    public function products(): HasMany
+    {
+        return $this->hasMany(Product::class, 'category_uuid', 'uuid');
+    }
 }
