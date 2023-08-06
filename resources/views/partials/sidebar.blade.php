@@ -10,7 +10,7 @@
     </li>
 
     <li class="sidebar-item">
-        <a class="sidebar-link" href="#">
+        <a class="sidebar-link" href="{{route('admin.category')}}">
             <i class="align-middle" data-feather="grid"></i> <span class="align-middle">Category</span>
         </a>
     </li>

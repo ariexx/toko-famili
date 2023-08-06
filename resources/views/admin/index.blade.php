@@ -23,6 +23,7 @@
 </head>
 
 <body>
+@include('sweetalert::alert')
 <div class="wrapper">
     <nav id="sidebar" class="sidebar js-sidebar">
         <div class="sidebar-content js-simplebar">

@@ -14,6 +14,11 @@ Route::group(['prefix' => 'admin'], function() {
         //logout
         Route::post('/logout', [\App\Http\Controllers\Admin\LoginController::class, 'logout'])->name('admin.logout');
         Route::get('/dashboard', [\App\Http\Controllers\Admin\AdminController::class, 'index'])->name('admin.dashboard');
-        Route::get('/category', [\App\Http\Controllers\Admin\CategoryController::class, 'index'])->name('admin.category');
+
+        //category
+        Route::group(['prefix' => 'category'], function (){
+            Route::get('/', [\App\Http\Controllers\Admin\CategoryController::class, 'index'])->name('admin.category');
+            Route::post('/create', [\App\Http\Controllers\Admin\CategoryController::class, 'create'])->name('admin.category.create');
+        });
     });
 });
