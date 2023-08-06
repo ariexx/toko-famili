@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Services\LoginServices;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
 class LoginController extends Controller
@@ -15,25 +16,31 @@ class LoginController extends Controller
 
     public function login(Request $request)
     {
-        $onlyRequest = $request->only(['email', 'password']);
-        //validate request
-        $validator = \Validator::make($onlyRequest, [
+        $credentials = $request->only(['email', 'password']);
+
+        $validator = \Validator::make($credentials, [
             'email' => 'required|email',
             'password' => 'required'
         ]);
 
         if ($validator->fails()) {
+            alert()->error('Error', 'Validator Failed');
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
-        //attempt login
-        $onlyRequest['level'] = 'admin';
-        if (\Auth::attempt($onlyRequest, true)) {
-            return redirect()->intended(route('admin.dashboard'));
+        if(\Auth::attempt($credentials, true)) {
+            //regenerate session
+            $request->session()->regenerate();
+            return redirect()->to(route('admin.dashboard'));
         }
 
-        alert()->error('Gagal!', "Login Failed");
-        //if failed
-        return redirect()->back();
+        alert()->error('Error', 'Login Failed');
+        return redirect()->back()->withInput()->withErrors(['email' => 'These credentials do not match our records.']);
+    }
+
+    public function logout()
+    {
+        \Auth::logout();
+        return redirect()->route('admin.login');
     }
 }
