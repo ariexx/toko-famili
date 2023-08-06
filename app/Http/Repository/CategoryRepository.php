@@ -25,4 +25,19 @@ class CategoryRepository
 
         alert()->error('Error', 'Category creation failed');
     }
+
+    public function categoryDetails($uuid): Category
+    {
+        return $this->category->where('uuid', $uuid)->firstOrFail();
+    }
+
+    public function update(array $requestOnly, $uuid): bool
+    {
+        $update = $this->category->whereUuid($uuid)->update($requestOnly);
+        if ($update) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

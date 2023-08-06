@@ -3,13 +3,13 @@
         Pages
     </li>
 
-    <li class="sidebar-item active">
-        <a class="sidebar-link" href="index.html">
+    <li class="sidebar-item {{ (request()->is('admin/dashboard')) ? 'active' : ''}}">
+        <a class="sidebar-link" href="{{route('admin.dashboard')}}">
             <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Dashboard</span>
         </a>
     </li>
 
-    <li class="sidebar-item">
+    <li class="sidebar-item {{ (request()->is('admin/category*')) ? 'active' : ''}}">
         <a class="sidebar-link" href="{{route('admin.category')}}">
             <i class="align-middle" data-feather="grid"></i> <span class="align-middle">Category</span>
         </a>

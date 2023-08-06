@@ -30,4 +30,30 @@ class CategoryController extends Controller
         }
         return $save;
     }
+    public function edit($uuid)
+    {
+        $subTitle = "Category";
+        $category = $this->categoryService->categoryDetails($uuid);
+        return view('admin.category.edit', compact('subTitle', 'category'));
+    }
+
+    public function update(Request $request, $uuid)
+    {
+        $requestOnly = $request->only(['name']);
+        $update = $this->categoryService->update($requestOnly, $uuid);
+        if (!$update) {
+            alert()->error('Error', 'Category update failed');
+            return redirect()->back();
+        }
+        alert()->success('Success', 'Category updated successfully');
+        return redirect()->route('admin.category');
+    }
+
+    public function delete($uuid)
+    {
+        $category = $this->categoryService->categoryDetails($uuid);
+        $category->delete();
+        alert()->success('Success', 'Category deleted successfully');
+        return redirect()->back();
+    }
 }

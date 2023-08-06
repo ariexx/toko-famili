@@ -9,7 +9,7 @@
                 @csrf
                 <div class="card">
                     <div class="card-header">
-                        <h5 class="card-title mb-0">Category</h5>
+                        <h5 class="card-title mb-0">Add Category</h5>
                     </div>
                     <div class="card-body">
                         <input type="text" class="form-control" name="name" placeholder="Input category name">
@@ -45,9 +45,9 @@
                                 <td>{{$category->created_at->format('Y-m-d H:i:s')}}</td>
                                 <td>
                                     <div class="btn-group">
-                                        <a class="btn btn-outline-primary" style="border-radius: 2px;" href="#">Edit</a>
+                                        <a class="btn btn-outline-primary" style="border-radius: 2px;" href="{{route('admin.category.edit', $category->uuid)}}">Edit</a>
                                         &nbsp;
-                                        <form action="#" method="post">
+                                        <form action="{{route('admin.category.delete', $category->uuid)}}" method="post">
                                             @csrf
                                             @method('delete')
                                         <button class="btn btn-outline-danger"  style="border-radius: 2px;">Delete</button>
