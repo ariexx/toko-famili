@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Services\LoginServices;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
 class LoginController extends Controller
@@ -28,10 +27,13 @@ class LoginController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
-        if(\Auth::attempt($credentials, true)) {
-            //regenerate session
-            $request->session()->regenerate();
-            return redirect()->to(route('admin.dashboard'));
+        if(auth()->attempt($credentials)) {
+            if(auth()->user()->isAdmin()) {
+                return redirect()->route('admin.dashboard');
+            }else{
+                //return to user dashboard
+                dd("not admin");
+            }
         }
 
         alert()->error('Error', 'Login Failed');
@@ -40,7 +42,7 @@ class LoginController extends Controller
 
     public function logout()
     {
-        \Auth::logout();
-        return redirect()->route('admin.login');
+        auth()->logout();
+        return redirect()->route('login');
     }
 }

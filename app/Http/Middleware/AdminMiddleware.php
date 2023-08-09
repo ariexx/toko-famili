@@ -7,11 +7,18 @@ use Illuminate\Http\Request;
 
 class AdminMiddleware
 {
-    public function handle(Request $request, Closure $next)
+    public function handle(Request $request, Closure $next): ?string
     {
-        if (!auth()->check() || auth()->user()->level != 'admin') {
-            abort(403, 'Unauthorized action.');
+        if(auth()->check()) {
+            if(auth()->user()->isAdmin()) {
+                return $next($request);
+            }else{
+                alert()->error('Error', 'You are not allowed to access this page');
+                return redirect()->route('admin.login');
+            }
         }
-       return $next($request);
+
+        alert()->error('Error', 'You are not allowed to access this page');
+        return redirect()->route('login');
     }
 }

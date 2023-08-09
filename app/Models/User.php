@@ -15,6 +15,8 @@ class User extends Authenticatable
 
     protected $table = 'users';
     protected $primaryKey = 'uuid';
+    protected $keyType = "string";
+    public $incrementing = false;
 
     /**
      * The attributes that are mass assignable.
@@ -25,6 +27,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'level'
     ];
 
     /**
@@ -51,5 +54,10 @@ class User extends Authenticatable
     public function userDetail(): HasOne
     {
         return $this->hasOne(UserDetail::class, 'user_uuid', 'uuid');
+    }
+
+    public function isAdmin(): bool
+    {
+        return $this->level === 'admin';
     }
 }

@@ -3,14 +3,20 @@
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return "Hello World";
+    return redirect()->route("login");
 });
+
+Route::get('404', function () {
+    abort(404);
+});
+
+//Auth Route
+Route::get('/login', [\App\Http\Controllers\Admin\LoginController::class, 'showLoginForm'])->name('login');
+Route::post('/login', [\App\Http\Controllers\Admin\LoginController::class, 'login'])->name('admin.login.submit');
 
 //Admin Login Route
 Route::group(['prefix' => 'admin'], function() {
-    Route::get('/login', [\App\Http\Controllers\Admin\LoginController::class, 'showLoginForm'])->name('admin.login');
-    Route::post('/login', [\App\Http\Controllers\Admin\LoginController::class, 'login'])->name('admin.login.submit');
-    Route::middleware(['AdminMiddleware'])->group(function() {
+    Route::middleware(['auth'])->group(function() {
         //logout
         Route::post('/logout', [\App\Http\Controllers\Admin\LoginController::class, 'logout'])->name('admin.logout');
         Route::get('/dashboard', [\App\Http\Controllers\Admin\AdminController::class, 'index'])->name('admin.dashboard');
