@@ -62,6 +62,16 @@ class User extends Authenticatable
         return $this->level === 'admin';
     }
 
+    public function isUser(): bool
+    {
+        return $this->level === 'user';
+    }
+
+    public function hasDetailUser(): bool
+    {
+        return $this->userDetail()->exists();
+    }
+
     public function orders(): HasMany
     {
         return $this->hasMany(Order::class, 'user_uuid', 'uuid');
