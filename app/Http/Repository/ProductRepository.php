@@ -41,4 +41,9 @@ class ProductRepository
         return true;
     }
 
+    public function getOrders()
+    {
+        return $this->product->with('category')->simplePaginate(10);
+    }
+
 }

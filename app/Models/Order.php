@@ -10,6 +10,19 @@ class Order extends Model
 {
     use SoftDeletes;
 
+    protected $table = 'orders';
+    public $incrementing = false;
+    protected $keyType = 'string';
+    protected $primaryKey = 'uuid';
+
+    protected $fillable = [
+        'user_uuid',
+        'product_uuid',
+        'total',
+        'detail_address',
+        'description',
+    ];
+
     public function users(): BelongsTo
     {
         return $this->belongsTo(User::class, 'user_uuid', 'uuid');

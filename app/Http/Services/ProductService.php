@@ -37,4 +37,9 @@ class ProductService
         }
         return true;
     }
+
+    public function getOrders()
+    {
+        return $this->productRepository->getOrders();
+    }
 }

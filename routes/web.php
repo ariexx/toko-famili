@@ -38,5 +38,13 @@ Route::group(['prefix' => 'admin'], function() {
             Route::put('/update/{uuid}', [\App\Http\Controllers\Admin\ProductController::class, 'update'])->name('admin.product.update');
             Route::delete('/delete/{uuid}', [\App\Http\Controllers\Admin\ProductController::class, 'destroy'])->name('admin.product.delete');
         });
+
+        //order
+        Route::group(['prefix' => 'order'], function (){
+            Route::get('/', [\App\Http\Controllers\Admin\OrderController::class, 'index'])->name('admin.order');
+            Route::get('/detail/{uuid}', [\App\Http\Controllers\Admin\OrderController::class, 'detail'])->name('admin.order.detail');
+            Route::put('/update/{uuid}', [\App\Http\Controllers\Admin\OrderController::class, 'update'])->name('admin.order.update');
+            Route::delete('/delete/{uuid}', [\App\Http\Controllers\Admin\OrderController::class, 'destroy'])->name('admin.order.delete');
+        });
     });
 });
