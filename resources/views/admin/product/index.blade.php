@@ -68,9 +68,9 @@
                                 <td>{{$product->created_at->format('Y-m-d H:i:s')}}</td>
                                 <td>
                                     <div class="btn-group">
-                                        <a class="btn btn-outline-primary" style="border-radius: 2px;" href="{{route('admin.category.edit', $product->uuid)}}">Edit</a>
+                                        <a class="btn btn-outline-primary" style="border-radius: 2px;" href="{{route('admin.product.edit', $product->uuid)}}">Edit</a>
                                         &nbsp;
-                                        <form action="{{route('admin.category.delete', $product->uuid)}}" method="post">
+                                        <form action="{{route('admin.product.delete', $product->uuid)}}" method="post">
                                             @csrf
                                             @method('delete')
                                             <button class="btn btn-outline-danger"  style="border-radius: 2px;">Delete</button>

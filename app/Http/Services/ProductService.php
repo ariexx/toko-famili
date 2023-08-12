@@ -23,4 +23,18 @@ class ProductService
         }
         return true;
     }
+
+    public function productDetails($id)
+    {
+        return $this->productRepository->productDetails($id);
+    }
+
+    public function update(array $requestOnly, $id)
+    {
+        $update = $this->productRepository->update($requestOnly, $id);
+        if (!$update) {
+            return false;
+        }
+        return true;
+    }
 }

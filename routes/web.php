@@ -36,7 +36,7 @@ Route::group(['prefix' => 'admin'], function() {
             Route::post('/create', [\App\Http\Controllers\Admin\ProductController::class, 'store'])->name('admin.product.store');
             Route::get('/edit/{uuid}', [\App\Http\Controllers\Admin\ProductController::class, 'edit'])->name('admin.product.edit');
             Route::put('/update/{uuid}', [\App\Http\Controllers\Admin\ProductController::class, 'update'])->name('admin.product.update');
-            Route::delete('/delete/{uuid}', [\App\Http\Controllers\Admin\ProductController::class, 'delete'])->name('admin.product.delete');
+            Route::delete('/delete/{uuid}', [\App\Http\Controllers\Admin\ProductController::class, 'destroy'])->name('admin.product.delete');
         });
     });
 });

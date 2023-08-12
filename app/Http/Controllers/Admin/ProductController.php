@@ -44,13 +44,29 @@ class ProductController extends Controller
 
     public function edit($id)
     {
+        $subTitle = "Product";
+        $product = $this->productService->productDetails($id);
+        $categories = Category::all();
+        return view('admin.product.edit', compact('subTitle', 'product', 'categories'));
     }
 
     public function update(Request $request, $id)
     {
+        $requestOnly = $request->only(['name', 'category', 'price', 'quantity', 'description']);
+        $update = $this->productService->update($requestOnly, $id);
+        if (!$update) {
+            alert()->error('Error', 'Product update failed');
+            return redirect()->back();
+        }
+        alert()->success('Success', 'Product updated successfully');
+        return redirect()->route('admin.product');
     }
 
     public function destroy($id)
     {
+        $product = $this->productService->productDetails($id);
+        $product->delete();
+        alert()->success('Success', 'Product deleted successfully');
+        return redirect()->back();
     }
 }
