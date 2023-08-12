@@ -29,5 +29,14 @@ Route::group(['prefix' => 'admin'], function() {
             Route::put('/update/{uuid}', [\App\Http\Controllers\Admin\CategoryController::class, 'update'])->name('admin.category.update');
             Route::delete('/delete/{uuid}', [\App\Http\Controllers\Admin\CategoryController::class, 'delete'])->name('admin.category.delete');
         });
+
+        //product
+        Route::group(['prefix' => 'product'], function (){
+            Route::get('/', [\App\Http\Controllers\Admin\ProductController::class, 'index'])->name('admin.product');
+            Route::post('/create', [\App\Http\Controllers\Admin\ProductController::class, 'store'])->name('admin.product.store');
+            Route::get('/edit/{uuid}', [\App\Http\Controllers\Admin\ProductController::class, 'edit'])->name('admin.product.edit');
+            Route::put('/update/{uuid}', [\App\Http\Controllers\Admin\ProductController::class, 'update'])->name('admin.product.update');
+            Route::delete('/delete/{uuid}', [\App\Http\Controllers\Admin\ProductController::class, 'delete'])->name('admin.product.delete');
+        });
     });
 });

@@ -15,9 +15,9 @@
         </a>
     </li>
 
-    <li class="sidebar-item">
-        <a class="sidebar-link" href="pages-sign-in.html">
-            <i class="align-middle" data-feather="log-in"></i> <span class="align-middle">Sign In</span>
+    <li class="sidebar-item {{ (request()->is('admin/product*')) ? 'active' : ''}}">
+        <a class="sidebar-link" href="{{route('admin.product')}}">
+            <i class="align-middle" data-feather="box"></i> <span class="align-middle">Product</span>
         </a>
     </li>
 
