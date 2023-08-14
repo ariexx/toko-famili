@@ -23,7 +23,7 @@
 
     <li class="sidebar-item {{ (request()->is('admin/order*')) ? 'active' : ''}}">
         <a class="sidebar-link" href="{{route('admin.order')}}">
-            <i class="align-middle" data-feather="user-plus"></i> <span class="align-middle">Order</span>
+            <i class="align-middle" data-feather="package"></i> <span class="align-middle">Order</span>
         </a>
     </li>
 </ul>

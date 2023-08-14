@@ -1,4 +1,4 @@
-@extends('dashboard.admin.index')
+@extends('admin.index')
 @section('content')
     <div class="mb-3">
         <h1 class="h3 d-inline align-middle">Order List</h1>

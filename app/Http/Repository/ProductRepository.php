@@ -46,4 +46,9 @@ class ProductRepository
         return $this->product->with('category')->simplePaginate(10);
     }
 
+    public function totalProducts()
+    {
+        return $this->product->count();
+    }
+
 }

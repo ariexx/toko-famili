@@ -42,4 +42,9 @@ class ProductService
     {
         return $this->productRepository->getOrders();
     }
+
+    public function totalProducts()
+    {
+        return $this->productRepository->totalProducts();
+    }
 }

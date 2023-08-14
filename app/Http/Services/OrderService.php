@@ -16,4 +16,32 @@ class OrderService
         return $this->orderRepository->getOrders();
     }
 
+    public function totalEarnings()
+    {
+        return $this->orderRepository->totalEarnings();
+    }
+
+    public function totalOrders()
+    {
+        return $this->orderRepository->totalOrders();
+    }
+
+    public function totalUsers()
+    {
+        return $this->orderRepository->totalUsers();
+    }
+
+    public function chartData()
+    {
+        $orders = $this->orderRepository->chartData();
+        $data = [];
+        foreach ($orders as $order) {
+            $data[] = [
+                'date' => $order->date,
+                'total' => $order->total,
+            ];
+        }
+        return $data;
+    }
+
 }
