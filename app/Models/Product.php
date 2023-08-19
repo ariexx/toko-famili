@@ -36,4 +36,9 @@ class Product extends Model
     {
         return "Rp " . number_format($this->price,2,',','.');
     }
+
+    public function cart(): BelongsTo
+    {
+        return $this->belongsTo(Cart::class);
+    }
 }
