@@ -2,9 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return redirect()->route("login");
-});
 
 Route::get('404', function () {
     abort(404);
@@ -47,4 +44,14 @@ Route::group(['prefix' => 'admin'], function() {
             Route::delete('/delete/{uuid}', [\App\Http\Controllers\Admin\OrderController::class, 'destroy'])->name('admin.order.delete');
         });
     });
+});
+
+//Guest
+Route::group([], function () {
+    Route::get('/', function () {
+        return view('user.pages.main');
+    })->name('user.main');
+
+    //category
+    Route::get('/category', \App\Http\Controllers\Product\CategoryController::class)->name('product.category');
 });
