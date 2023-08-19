@@ -3,11 +3,17 @@
 namespace App\Http\Services;
 
 use App\Http\Repository\ProductRepository;
+use Illuminate\Support\Collection;
 
 class ProductService
 {
     public function __construct(protected ProductRepository $productRepository)
     {
+    }
+
+    public function getAllProducts(): array|\Illuminate\Database\Eloquent\Collection
+    {
+        return $this->productRepository->getAllProducts();
     }
 
     public function productLists()

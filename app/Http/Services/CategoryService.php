@@ -15,6 +15,11 @@ class CategoryService
         return $this->categoryRepository->categoryLists();
     }
 
+    public function getAllCategories(): array
+    {
+        return $this->categoryRepository->getAllCategories();
+    }
+
     public function create(array $data)
     {
         $validator = \Validator::make($data, [

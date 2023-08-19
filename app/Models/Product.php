@@ -30,4 +30,9 @@ class Product extends Model
     {
         return $this->belongsTo(Order::class, 'product_uuid', 'uuid');
     }
+
+    public function getRupiahPriceAttribute(): string
+    {
+        return "Rp " . number_format($this->price,2,',','.');
+    }
 }

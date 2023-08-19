@@ -3,6 +3,7 @@
 namespace App\Http\Repository;
 
 use App\Models\Product;
+use Illuminate\Database\Eloquent\Collection;
 
 class ProductRepository
 {
@@ -49,6 +50,11 @@ class ProductRepository
     public function totalProducts()
     {
         return $this->product->count();
+    }
+
+    public function getAllProducts(): Collection
+    {
+        return $this->product->get();
     }
 
 }

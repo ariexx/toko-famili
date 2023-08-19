@@ -5,6 +5,8 @@ namespace App\Http\Repository;
 
 use App\Models\Category;
 use App\Models\User;
+use PhpParser\ErrorHandler\Collecting;
+use Ramsey\Collection\Collection;
 
 class CategoryRepository
 {
@@ -39,5 +41,10 @@ class CategoryRepository
         } else {
             return false;
         }
+    }
+
+    public function getAllCategories(): array|\LaravelIdea\Helper\App\Models\_IH_Category_C
+    {
+        return $this->category->get();
     }
 }
