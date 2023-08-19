@@ -70,9 +70,9 @@
         </p>
     </div>
 </footer>
+@stack('custom-scripts')
 
 <!-- #endregion Footer -->
 </div>
 </body>
-
 </html>

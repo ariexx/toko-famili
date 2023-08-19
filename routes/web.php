@@ -54,4 +54,10 @@ Route::group([], function () {
 
     //category
     Route::get('/category', \App\Http\Controllers\Product\CategoryController::class)->name('product.category');
+
+    //Cart
+    Route::group(['prefix' => 'carts', 'middleware' => ['auth']], function () {
+        Route::get('/', [\App\Http\Controllers\Cart\CartController::class, 'index'])->name('cart.index');
+        Route::middleware('throttle:web')->post('/store', [\App\Http\Controllers\Cart\CartController::class, 'store'])->name('cart.store');
+    });
 });

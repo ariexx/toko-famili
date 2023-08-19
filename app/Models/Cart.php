@@ -10,21 +10,21 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Cart extends Model
 {
-    use SoftDeletes, HasUuids;
+    use HasUuids;
 
     protected $primaryKey = "uuid";
     protected $table = "carts";
     public $incrementing = false;
 
-    protected $fillable = ['product_uuid', 'user_uuid'];
+    protected $fillable = ['product_uuid', 'user_uuid', 'quantity'];
 
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
 
-    public function products(): HasMany
+    public function product(): BelongsTo
     {
-        return $this->hasMany(Product::class, 'product_uuid', 'uuid');
+        return $this->belongsTo(Product::class);
     }
 }

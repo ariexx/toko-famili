@@ -1,4 +1,7 @@
 @extends('user.main-page.main')
+@push('jquery')
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+@endpush
 @section('content')
     <!-- #region Body -->
     <div class="container grid grid-cols-4 gap-6 pt-4 pb-16 items-start mx-auto">
@@ -75,9 +78,19 @@
                                 <p class="text-xl text-primary font-semibold">{{$value->rupiah_price}}</p>
                             </div>
                         </div>
-                        <a href="#"
-                           class="block w-full py-3 text-center text-white bg-green-700 border border-primary hover:bg-green-500 transition">Add
-                            to cart</a>
+                            @if(Auth::guest())
+                                <a href="{{route('login')}}"
+                                        class="add-to-cart block w-full py-3 text-center text-white bg-green-700 border border-primary hover:bg-green-500 transition">Add
+                                    to cart</a>
+                            @else
+                            <form class="form-cart" action="{{route('cart.store')}}" method="POST">
+                                @csrf
+                                <input type="hidden" name="product_uuid" value="{{$value->uuid}}">
+                                <button type="submit"
+                                   class="add-to-cart block w-full py-3 text-center text-white bg-green-700 border border-primary hover:bg-green-500 transition">Add
+                                    to cart</button>
+                            @endif
+                        </form>
                     </div>
                 @endforeach
             </div>
@@ -85,3 +98,25 @@
         <!-- #endregion Products -->
     </div>
 @endsection
+@push('custom-scripts')
+    <script>
+        $(document).ready(function(){
+            $(".form-cart").submit(function(r) {
+            r.preventDefault();
+                $.ajax({
+                type: "POST",
+                url: "{{route('cart.store')}}",
+                data: $(this).serialize(),
+                dataType: 'json',
+                success: function(e) {
+                    return alert("Sukses Menambah Product");
+                },
+                error: function(e) {
+                    return alert("Gagal Menambah Produk");
+                }
+            });
+        });
+    });
+    </script>
+@endpush
+
