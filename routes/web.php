@@ -11,6 +11,10 @@ Route::get('404', function () {
 Route::get('/login', [\App\Http\Controllers\Admin\LoginController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [\App\Http\Controllers\Admin\LoginController::class, 'login'])->name('admin.login.submit');
 
+//Register Route
+Route::get('/register', [\App\Http\Controllers\RegisterController::class, 'showRegisterForm'])->name('register');
+Route::post('/register', [\App\Http\Controllers\RegisterController::class, 'register'])->name('register.submit');
+
 //Admin Login Route
 Route::group(['prefix' => 'admin'], function() {
     Route::middleware(['auth'])->group(function() {
