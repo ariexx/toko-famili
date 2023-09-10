@@ -26,7 +26,7 @@
                     @if(auth()->check() && auth()->user()->isAdmin())
                         <a href="{{route('admin.dashboard')}}"><i class="gg-profile"></i></a>
                     @elseif(auth()->check() && auth()->user()->isUser())
-                        <a href="{{route('user.main')}}"><i class="gg-profile"></i></a>
+                        <a href="{{route('user.dashboard')}}"><i class="gg-profile"></i></a>
                     @else
                         <a href="/"><i class="gg-profile"></i></a>
                     @endif

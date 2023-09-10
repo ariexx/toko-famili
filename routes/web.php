@@ -15,6 +15,13 @@ Route::post('/login', [\App\Http\Controllers\Admin\LoginController::class, 'logi
 Route::get('/register', [\App\Http\Controllers\RegisterController::class, 'showRegisterForm'])->name('register');
 Route::post('/register', [\App\Http\Controllers\RegisterController::class, 'register'])->name('register.submit');
 
+//User Route
+Route::group(['prefix' => 'user'], function () {
+    Route::middleware('auth')->group(function () {
+       Route::get('/dashboard', [\App\Http\Controllers\User\UserController::class, 'index'])->name('user.dashboard');
+    });
+});
+
 //Admin Login Route
 Route::group(['prefix' => 'admin'], function() {
     Route::middleware(['auth', 'AdminMiddleware'])->group(function() {
