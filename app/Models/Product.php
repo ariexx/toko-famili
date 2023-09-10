@@ -42,4 +42,9 @@ class Product extends Model
     {
         return $this->hasMany(Cart::class, 'product_uuid', 'uuid');
     }
+
+    public function orderDetail(): BelongsTo
+    {
+        return $this->belongsTo(OrderDetail::class, 'product_uuid', 'uuid');
+    }
 }

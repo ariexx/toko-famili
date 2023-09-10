@@ -2,13 +2,15 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Order extends Model
 {
-    use SoftDeletes;
+    use SoftDeletes, HasUuids;
 
     protected $table = 'orders';
     public $incrementing = false;
@@ -17,10 +19,12 @@ class Order extends Model
 
     protected $fillable = [
         'user_uuid',
-        'product_uuid',
-        'total',
         'detail_address',
         'description',
+        'status',
+        'payment_status',
+        'invoice_id',
+        'payment_reference',
     ];
 
     public function users(): BelongsTo
@@ -28,8 +32,8 @@ class Order extends Model
         return $this->belongsTo(User::class, 'user_uuid', 'uuid');
     }
 
-    public function products(): BelongsTo
+    public function orderDetails(): HasMany
     {
-        return $this->belongsTo(Product::class, 'product_uuid', 'uuid');
+        return $this->hasMany(OrderDetail::class, 'order_uuid', 'uuid');
     }
 }

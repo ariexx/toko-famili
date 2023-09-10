@@ -27,9 +27,9 @@
                             <tr>
                                 <th scope="row">{{$loop->iteration}}</th>
                                 <th>{{$order->users->name}}</th>
-                                <td>{{$order->products->name}}</td>
-                                <td>{{$order->quantity}}</td>
-                                <td>{{$order->total}}</td>
+                                <td>{{$order->orderDetails->first()->product_name}}</td>
+                                <td>{{$order->orderDetails->first()->quantity}}</td>
+                                <td>{{$order->orderDetails->first()->total}}</td>
                                 <td>{{$order->detail_address}}</td>
                                 <td>{{$order->created_at->format('Y-m-d H:i:s')}}</td>
                             </tr>

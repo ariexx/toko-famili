@@ -115,9 +115,9 @@
                         <tr>
                             <td>{{$loop->iteration}}</td>
                             <td>{{$order->users->name}}</td>
-                            <td class="d-none d-xl-table-cell">{{$order->products->name}}</td>
-                            <td class="d-none d-xl-table-cell">{{$order->quantity}}</td>
-                            <td>{{$order->total}}</td>
+                            <td class="d-none d-xl-table-cell">{{$order->orderDetails->first()->product_name}}</td>
+                            <td class="d-none d-xl-table-cell">{{$order->orderDetails->first()->quantity}}</td>
+                            <td>{{$order->orderDetails()->sum('total')}}</td>
                             <td class="d-none d-md-table-cell">{{$order->detail_address}}</td>
                         </tr>
                     @endforeach

@@ -48,9 +48,17 @@
                 </tbody>
             </table>
             <div class="mx-6 my-6 flex justify-end">
-                <button class="bg-green-700 text-white py-2 px-4 hover:bg-green-500">
-                    Checkout now
-                </button>
+                <form method="POST" action="{{route('checkout.store')}}" class="checkout-form">
+                    @csrf
+                    @foreach($userCarts as $cart => $v)
+                        <input type="hidden" name="product_uuid[]" value="{{$v->product->uuid}}"/>
+                        <input type="hidden" name="quantity[]" value="{{$v->quantity}}"/>
+                        <input type="hidden" name="total[]" value="{{$v->quantity * $v->product->price}}">
+                    @endforeach
+                    <button type="submit" class="bg-green-700 text-white py-2 px-4 hover:bg-green-500">
+                        Checkout now
+                    </button>
+                </form>
             </div>
         </div>
     </div>

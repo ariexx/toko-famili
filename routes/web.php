@@ -60,4 +60,12 @@ Route::group([], function () {
         Route::get('/', [\App\Http\Controllers\Cart\CartController::class, 'index'])->name('cart.index');
         Route::middleware('throttle:web')->post('/store', [\App\Http\Controllers\Cart\CartController::class, 'store'])->name('cart.store');
     });
+
+    //Checkout
+    Route::group(['prefix' => 'checkout', 'middleware' => ['auth']], function () {
+        Route::post('/store', [\App\Http\Controllers\CheckoutController::class, 'store'])->name('checkout.store');
+    });
 });
+
+//callback tripay
+Route::post('/callback', [\App\Http\Controllers\Payment\PaymentController::class, 'callback'])->name('callback');

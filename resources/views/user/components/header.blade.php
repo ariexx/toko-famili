@@ -9,6 +9,7 @@
     <meta name="referrer" content="always">
     <meta name="description" content="TailwindCSS Ecommerce Template">
     <link rel="stylesheet" href="{{asset('assets/css/main.css')}}">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <link href='https://cdn.jsdelivr.net/npm/css.gg@2.0.0/icons/all.min.css' rel='stylesheet'>
     <script src="//unpkg.com/alpinejs" defer></script>
     <script src="{{asset('assets/js/main.js')}}" defer></script>

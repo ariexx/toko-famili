@@ -32,7 +32,7 @@ class LoginController extends Controller
                 return redirect()->route('admin.dashboard');
             }else{
                 //return to user dashboard
-                dd("not admin");
+                return redirect()->route('user.main');
             }
         }
 

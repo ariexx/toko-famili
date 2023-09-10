@@ -12,12 +12,12 @@ class OrderRepository
 
     public function getOrders()
     {
-        return $this->order->with(['products', 'users'])->simplePaginate(10);
+        return $this->order->with(['orderDetails', 'orderDetails.product', 'users'])->simplePaginate(10);
     }
 
     public function totalEarnings()
     {
-        return $this->order->sum('total');
+        return $this->order->orderDetails()->sum('total');
     }
 
     public function totalOrders()
@@ -32,7 +32,7 @@ class OrderRepository
 
     public function chartData()
     {
-        return $this->order->selectRaw('DATE(created_at) as date, sum(total) as total')
+        return $this->order->orderDetails()->selectRaw('DATE(created_at) as date, sum(total) as total')
             ->groupBy('date')
             ->orderBy('date', 'ASC')
             ->get();
