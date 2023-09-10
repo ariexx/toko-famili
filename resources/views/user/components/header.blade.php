@@ -23,7 +23,13 @@
         <div class="container mx-auto px-6 py-3">
             <div class="flex items-center justify-between">
                 <div class="hidden w-full text-gray-600 md:flex md:items-center">
-                    <i class="gg-profile"></i>
+                    @if(auth()->check() && auth()->user()->isAdmin())
+                        <a href="{{route('admin.dashboard')}}"><i class="gg-profile"></i></a>
+                    @elseif(auth()->check() && auth()->user()->isUser())
+                        <a href="{{route('user.main')}}"><i class="gg-profile"></i></a>
+                    @else
+                        <a href="/"><i class="gg-profile"></i></a>
+                    @endif
                 </div>
                 <div
                     class="w-full text-green-500 md:text-center font-mono text-3xl font-semibold uppercase tracking-widest">

@@ -13,8 +13,7 @@ class AdminMiddleware
             if(auth()->user()->isAdmin()) {
                 return $next($request);
             }else{
-                alert()->error('Error', 'You are not allowed to access this page');
-                return redirect()->route('admin.login');
+                abort(403);
             }
         }
 
