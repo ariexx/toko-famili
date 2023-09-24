@@ -26,5 +26,11 @@
                 <i class="align-middle" data-feather="package"></i> <span class="align-middle">Order</span>
             </a>
         </li>
+    @elseif(auth()->user()->isUser())
+        <li class="sidebar-item {{ (request()->is('user/profile*')) ? 'active' : ''}}">
+            <a class="sidebar-link" href="{{route('user.profile')}}">
+                <i class="align-middle" data-feather="user"></i> <span class="align-middle">User Settings</span>
+            </a>
+        </li>
     @endif
 </ul>

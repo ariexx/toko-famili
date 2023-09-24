@@ -29,8 +29,8 @@ class CheckoutController extends Controller
                     'invoice_id' => 'INV-'.time(),
                     'payment_reference' => 'REF-'.time(),
                     'user_uuid' => auth()->id(),
-                    'detail_address' => "Jalan Ar Hakim",
-                    'description' => "ini adalah pesanan",
+                    'detail_address' => \Auth::user()->userDetail->street_detail ?? "Jalan Ar Hakim",
+                    'description' => \Auth::user()->userDetail->street_detail ?? "Jalan Ar Hakim",
                     'status' => 'pending',
                     'payment_status' => 'pending',
                 ]);
@@ -82,7 +82,7 @@ class CheckoutController extends Controller
         $data['signature'] = hash_hmac('sha256', $merchantCode . $merchantRef . $data['amount'], $privateKey);
         $data['order_items'] = [
             [
-                'name' => 'Test Product',
+                'name' => 'Pembayaran Produk',
                 'price' => $data['amount'],
                 'quantity' => 1,
 

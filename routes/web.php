@@ -19,6 +19,12 @@ Route::post('/register', [\App\Http\Controllers\RegisterController::class, 'regi
 Route::group(['prefix' => 'user'], function () {
     Route::middleware('auth')->group(function () {
        Route::get('/dashboard', [\App\Http\Controllers\User\UserController::class, 'index'])->name('user.dashboard');
+
+       //User Profile
+         Route::group(['prefix' => 'profile'], function () {
+              Route::get('/', [\App\Http\Controllers\User\ProfileController::class, 'index'])->name('user.profile');
+              Route::put('/update', [\App\Http\Controllers\User\ProfileController::class, 'update'])->name('user.profile.update');
+         });
     });
 });
 
