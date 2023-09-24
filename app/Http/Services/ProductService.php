@@ -23,6 +23,13 @@ class ProductService
 
     public function create(array $requestOnly): bool
     {
+
+        //store image
+        $image = $requestOnly['image'];
+        $imageName = time() . '.' . $image->extension();
+        $image->move(public_path('images'), $imageName);
+        $requestOnly['image'] = $imageName;
+
         $save = $this->productRepository->create($requestOnly);
         if (!$save) {
             return false;
@@ -37,6 +44,14 @@ class ProductService
 
     public function update(array $requestOnly, $id)
     {
+        //check image is exist or not
+        if (isset($requestOnly['image'])) {
+            //store image
+            $image = $requestOnly['image'];
+            $imageName = time() . '.' . $image->extension();
+            $image->move(public_path('images'), $imageName);
+            $requestOnly['image'] = $imageName;
+        }
         $update = $this->productRepository->update($requestOnly, $id);
         if (!$update) {
             return false;

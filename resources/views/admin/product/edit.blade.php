@@ -1,11 +1,11 @@
-@extends('dashboard.admin.index')
+@extends('admin.index')
 @section('content')
     <div class="mb-3">
         <h1 class="h3 d-inline align-middle">Edit Product</h1>
     </div>
     <div class="row">
         <div class="col-12 col-lg-12">
-            <form action="{{route('admin.product.update', $product->uuid)}}" method="POST">
+            <form action="{{route('admin.product.update', $product->uuid)}}" method="POST" enctype="multipart/form-data">
                 @method('PUT')
                 @csrf
                 <div class="card">
@@ -31,6 +31,9 @@
                     </div>
                     <div class="card-body">
                         <textarea class="form-control" name="description" rows="2" placeholder="Input product description">{{$product->description}}</textarea>
+                    </div>
+                    <div class="card-body">
+                        <input type="file" class="form-control" name="image" placeholder="Input product image">
                     </div>
                     <div class="card-footer">
                         <button type="submit" class="btn btn-primary">Submit</button>

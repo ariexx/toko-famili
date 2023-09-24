@@ -17,7 +17,7 @@
                     </ul>
                 </div>
                 <div class="py-16 text-center lg:py-0 w-full">
-                    <a href="index.html" class="font-mono text-4xl uppercase tracking-widest">Acme</a>
+                    <a href="index.html" class="font-mono text-4xl uppercase tracking-widest">{{config('app.name')}}</a>
                     <div class="flex items-center justify-center pt-5">
                         <a href="#">
                             <div

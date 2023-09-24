@@ -27,7 +27,7 @@ class ProductController extends Controller
 
     public function store(Request $request)
     {
-        $requestOnly = $request->only(['name', 'category', 'price', 'quantity', 'description']);
+        $requestOnly = $request->only(['name', 'category', 'price', 'quantity', 'description', 'image']);
         $save = $this->productService->create($requestOnly);
         if (!$save) {
             alert()->error('Error', 'Product create failed');

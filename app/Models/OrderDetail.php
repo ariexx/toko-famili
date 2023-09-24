@@ -34,6 +34,6 @@ class OrderDetail extends Model
 
     public function getProductNameAttribute()
     {
-        return $this->product->name;
+        return $this->product->name ?? null;
     }
 }

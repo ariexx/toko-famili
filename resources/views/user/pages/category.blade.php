@@ -53,7 +53,7 @@
                 @foreach($products as $product => $value)
                     <div class="bg-white shadow-md overflow-hidden">
                         <div class="relative group">
-                            <img src="https://jluterek.github.io/tailwind-ecommerce-template/images/tshirt-front-white-small.png" alt="product 1" class="w-full">
+                            <img src="{{asset('images/' . $value->image)}}" alt="product 1" class="w-full">
                             <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center
                                     justify-center gap-2 opacity-0 group-hover:opacity-100 transition">
                                 <a href="#"

@@ -28,7 +28,7 @@
                     @elseif(auth()->check() && auth()->user()->isUser())
                         <a href="{{route('user.dashboard')}}"><i class="gg-profile"></i></a>
                     @else
-                        <a href="/"><i class="gg-profile"></i></a>
+                        <a href="{{ route('login') }}"><i class="gg-profile"></i></a>
                     @endif
                 </div>
                 <div

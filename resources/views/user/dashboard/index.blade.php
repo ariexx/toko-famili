@@ -23,7 +23,7 @@
                             <h1 class="mt-1 mb-3">10</h1>
                         </div>
                     </div>
-                </div>y
+                </div>
             </div>
         </div>
     </div>

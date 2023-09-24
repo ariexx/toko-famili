@@ -19,7 +19,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <h1 class="mt-1 mb-3">{{$totalProducts}}</h1>
+                                <h1 class="mt-1 mb-3">{{$totalProducts ?? ""}}</h1>
                             </div>
                         </div>
                         <div class="card">
@@ -35,7 +35,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <h1 class="mt-1 mb-3">{{$totalUsers}}</h1>
+                                <h1 class="mt-1 mb-3">{{$totalUsers ?? ""}}</h1>
                             </div>
                         </div>
                     </div>
@@ -53,7 +53,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <h1 class="mt-1 mb-3">{{$totalEarnings}}</h1>
+                                <h1 class="mt-1 mb-3">{{$totalEarnings ?? ""}}</h1>
                             </div>
                         </div>
                         <div class="card">
@@ -69,7 +69,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <h1 class="mt-1 mb-3">{{$totalOrders}}</h1>
+                                <h1 class="mt-1 mb-3">{{$totalOrders ?? ""}}</h1>
                             </div>
                         </div>
                     </div>
