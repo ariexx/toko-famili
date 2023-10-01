@@ -7,7 +7,7 @@ on:
     branches: [ "master" ]
 
 jobs:
-  laravel-tests:
+  laravel-deploy:
 
     runs-on: ubuntu-latest
 
@@ -16,10 +16,6 @@ jobs:
       with:
         php-version: '8.0'
     - uses: actions/checkout@v3
-    - name: Install Dependencies
-      run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
-    - name: Update Dependencies
-      run: composer update
     - name: Pull request
       run: git pull
     - name: Run Migration
