@@ -2,11 +2,11 @@
 @section('content')
 <div class="container mx-auto px-6">
     <div class="h-96 overflow-hidden bg-cover bg-center"
-         style="background-image: url('https://images.unsplash.com/photo-1579113800032-c38bd7635818?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=987&q=80')">
+         style="background-image: url('https://images.unsplash.com/photo-1607411144164-97857cf86e1a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=3387&q=80')">
         <div class="bg-gray-900 bg-opacity-50 flex items-center h-full">
             <div class="px-10 max-w-xl">
-                <h2 class="text-2xl text-white font-semibold">Buah dan Sayuran</h2>
-                <p class="mt-2 text-gray-400">Selamat datang di situs kami yang menyoroti keindahan alami buah-buahan dan sayuran! Temukan kelezatan dalam setiap warna dan rasa, serta nikmati manfaat kesehatan yang tak ternilai. Dari ladang langsung ke meja Anda, mari bersama-sama merayakan anugerah bumi melalui pilihan produk segar kami.</p>
+                <h2 class="text-2xl text-white font-semibold">Bahan Makanan dan Makanan Pokok</h2>
+                <p class="mt-2 text-gray-400">Selamat datang di dunia bahan makanan yang penuh warna dan kesehatan! Temukan kelezatan dan manfaatnya di situs kami, dari petani lokal langsung ke meja Anda. Mari kita jelajahi keindahan alam bahan makanan bersama-sama!.</p>
                 <button
                     class="flex items-center mt-4 px-3 py-2 bg-green-700 text-white text-sm uppercase font-medium hover:bg-green-500 focus:outline-none focus:bg-blue-500">
                     <span>Shop Now</span>
@@ -57,7 +57,7 @@
                     Free returns
                 </h3>
                 <p class="font-hk text-base tracking-wide text-secondary-lighter">
-                    Pengembalian gratis jika tidak segar
+                    Pengembalian gratis jika tidak sesuai
                 </p>
             </div>
         </div>
