@@ -26,7 +26,7 @@
 <div class="wrapper">
     <nav id="sidebar" class="sidebar js-sidebar">
         <div class="sidebar-content js-simplebar">
-            <a class="sidebar-brand" href="{{route('admin.dashboard')}}">
+            <a class="sidebar-brand" href="{{(auth()->user()->isUser() ? route('user.dashboard') : route('admin.dashboard'))}}">
                 <span class="align-middle">{{config('app.name')}}</span>
             </a>
             @include('partials.sidebar')
