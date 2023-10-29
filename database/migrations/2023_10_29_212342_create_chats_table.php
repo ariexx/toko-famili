@@ -11,6 +11,7 @@ return new class extends Migration {
             $table->uuid()->primary();
             $table->uuid('user_uuid');
             $table->text('message');
+            $table->boolean('is_read')->default(false);
             $table->foreign('user_uuid')->references('uuid')->on('users')->cascadeOnDelete();
             $table->timestamps();
         });
