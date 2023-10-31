@@ -83,8 +83,13 @@ class User extends Authenticatable
         return $this->hasMany(Cart::class, 'user_uuid', 'uuid');
     }
 
-    public function chats(): HasMany
+    public function fromChats(): HasMany
     {
-        return $this->hasMany(Chat::class, 'user_uuid', 'uuid');
+        return $this->hasMany(Chat::class, 'from_user_uuid', 'uuid');
+    }
+
+    public function toChats(): HasMany
+    {
+        return $this->hasMany(Chat::class, 'to_user_uuid', 'uuid');
     }
 }

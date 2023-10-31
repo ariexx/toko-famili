@@ -11,7 +11,8 @@ class Chat extends Model
     use HasUuids;
     protected $fillable = [
         'message',
-        'user_uuid',
+        'from_user_uuid',
+        'to_user_uuid',
         'is_read'
     ];
 
@@ -20,9 +21,16 @@ class Chat extends Model
     protected $keyType = "string";
     public $incrementing = false;
 
-    public function user(): BelongsTo
+    //create relationship with user
+    public function fromUser(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'from_user_uuid', 'uuid');
+    }
+
+    //create relationship with user
+    public function toUser(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'to_user_uuid', 'uuid');
     }
 
     public function getCreatedAtAttribute($value): string
