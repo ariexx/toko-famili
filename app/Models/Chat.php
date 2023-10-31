@@ -15,6 +15,11 @@ class Chat extends Model
         'is_read'
     ];
 
+    protected $table = 'chats';
+    protected $primaryKey = 'uuid';
+    protected $keyType = "string";
+    public $incrementing = false;
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);

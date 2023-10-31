@@ -82,4 +82,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Cart::class, 'user_uuid', 'uuid');
     }
+
+    public function chats(): HasMany
+    {
+        return $this->hasMany(Chat::class, 'user_uuid', 'uuid');
+    }
 }
