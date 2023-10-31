@@ -90,5 +90,7 @@ Route::group([], function () {
 Route::middleware('auth')->group(function() {
     Route::post('chat/send', [\App\Http\Controllers\ChatController::class, 'send'])->name('chat.send');
     Route::get('chat/get-messages', [\App\Http\Controllers\ChatController::class, 'getMessages'])->name('chat.messages');
+    Route::get('chat/get-last-chat-from-admin', [\App\Http\Controllers\ChatController::class, 'getLastChatFromAdmin'])->name('chat.last-chat-from-admin');
+    Route::post('chat/chat-with-user-from-admin/{userUuid}', [\App\Http\Controllers\ChatController::class, 'chatWithUserFromAdmin'])->name('chat.chat-with-user-from-admin');
     Route::resource('chat', \App\Http\Controllers\ChatController::class);
 });

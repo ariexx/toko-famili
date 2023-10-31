@@ -45,6 +45,7 @@
                             <th scope="col">Delivery Address</th>
                             <th scope="col">Status Pembayaran</th>
                             <th scope="col">Created At</th>
+                            <th scope="col">Action</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -58,6 +59,9 @@
                                 <td>{{$order->detail_address}}</td>
                                 <td>{{ucfirst($order->payment_status)}}</td>
                                 <td>{{$order->created_at->format('Y-m-d H:i:s')}}</td>
+                                <td>
+                                    <a href="{{route('chat.index')}}" class="btn btn-primary">Chat Admin</a>
+                                </td>
                             </tr>
                         @endforeach
                         </tbody>

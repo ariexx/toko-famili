@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Chat;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class ChatController extends Controller
@@ -10,8 +11,34 @@ class ChatController extends Controller
     public function index()
     {
         $userId = auth()->user()->uuid;
-        $allChat = Chat::whereUserUuid($userId)->get();
-        return view('user.chat.index', compact('allChat'));
+        $admin = User::where('level', 'admin')->first();
+
+        //get list user has chat with admin
+        $getAllUserChatWithAdmin = Chat::whereFromUserUuid($admin->uuid)->with(["fromUser", "toUser"])->orderBy('created_at', 'asc')->get()->unique('to_user_uuid');
+        //get name from $getAllUserChatWithAdmin
+        $allUserChatWithAdmin = [];
+        foreach ($getAllUserChatWithAdmin as $userChat) {
+            $allUserChatWithAdmin[] = $userChat->toUser;
+        }
+
+        $allChat = Chat::whereFromUserUuid($userId)->orWhere('from_user_uuid', $admin->uuid)->with(["fromUser", "toUser"])->orderBy('created_at', 'asc')->get();
+        return view('user.chat.index', compact('allChat', 'allUserChatWithAdmin'));
+    }
+
+    public function chatWithUserFromAdmin($userUuid, Request $request)
+    {
+        //send chat from admin to user
+        $admin = User::where('level', 'admin')->first();
+        $chat = Chat::create([
+            'from_user_uuid' => $admin->uuid,
+            'to_user_uuid' => $userUuid,
+            'message' => $request->message
+        ]);
+
+        return response()->json([
+            'status' => 'success',
+            'data' => $chat
+        ]);
     }
 
     public function create()
@@ -22,21 +49,25 @@ class ChatController extends Controller
     {
     }
 
-    public function show($id)
+    public function getLastChatFromAdmin()
     {
-        //show all chat from user
-        $allChat = Chat::whereUserUuid($id)->get();
+        $userId = auth()->user()->uuid;
+        $admin = User::where('level', 'admin')->first();
+        $lastChat = Chat::whereFromUserUuid($admin->uuid)->whereToUserUuid($userId)->latest()->first();
         return response()->json([
             'status' => 'success',
-            'data' => $allChat
+            'data' => $lastChat
         ]);
     }
 
     public function send(Request $request)
     {
         $userId = auth()->user()->uuid;
+        //get first admin role
+        $admin = User::where('level', 'admin')->first();
         $chat = Chat::create([
-            'user_uuid' => $userId,
+            'from_user_uuid' => $userId,
+            'to_user_uuid' => $admin->uuid,
             'message' => $request->message
         ]);
 
