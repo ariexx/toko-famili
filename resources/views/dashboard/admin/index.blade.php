@@ -108,6 +108,7 @@
                         <th class="d-none d-xl-table-cell">Quantity</th>
                         <th>Total</th>
                         <th class="d-none d-md-table-cell">Delivery Address</th>
+                        <th class="d-none d-md-table-cell">Action</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -119,6 +120,9 @@
                             <td class="d-none d-xl-table-cell">{{$order->orderDetails->first()->quantity}}</td>
                             <td>{{$order->orderDetails()->sum('total')}}</td>
                             <td class="d-none d-md-table-cell">{{$order->detail_address}}</td>
+                            <td class="d-none d-md-table-cell">
+                                <a href="{{route('chat.show-chat-by-user-uuid', $order->users->uuid)}}" class="btn btn-primary btn-sm">Chat with user</a>
+                            </td>
                         </tr>
                     @endforeach
                     </tbody>
