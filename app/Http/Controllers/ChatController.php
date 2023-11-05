@@ -12,17 +12,11 @@ class ChatController extends Controller
     {
         $userId = auth()->user()->uuid;
         $admin = User::where('level', 'admin')->first();
+        $adminUuid = $admin->uuid;
 
-        //get list user has chat with admin
-        $getAllUserChatWithAdmin = Chat::whereFromUserUuid($admin->uuid)->with(["fromUser", "toUser"])->orderBy('created_at', 'asc')->get()->unique('to_user_uuid');
-        //get name from $getAllUserChatWithAdmin
-        $allUserChatWithAdmin = [];
-        foreach ($getAllUserChatWithAdmin as $userChat) {
-            $allUserChatWithAdmin[] = $userChat->toUser;
-        }
-
-        $allChat = Chat::whereFromUserUuid($userId)->orWhere('from_user_uuid', $admin->uuid)->with(["fromUser", "toUser"])->orderBy('created_at', 'asc')->get();
-        return view('user.chat.index', compact('allChat', 'allUserChatWithAdmin'));
+        $allChat = Chat::where('from_user_uuid', $userId)->orWhere('from_user_uuid', $adminUuid)
+            ->with(["fromUser", "toUser"])->orderBy('created_at', 'asc')->get();
+        return view('user.chat.index', compact('allChat', 'adminUuid'));
     }
 
     public function chatWithUserFromAdmin($userUuid, Request $request)
@@ -53,7 +47,7 @@ class ChatController extends Controller
     {
         $userId = auth()->user()->uuid;
         $admin = User::where('level', 'admin')->first();
-        $lastChat = Chat::whereFromUserUuid($admin->uuid)->whereToUserUuid($userId)->latest()->first();
+        $lastChat = Chat::whereFromUserUuid($admin->uuid)->whereToUserUuid($userId)->orderBy('created_at', 'desc')->first();
         return response()->json([
             'status' => 'success',
             'data' => $lastChat
@@ -97,5 +91,51 @@ class ChatController extends Controller
         }
 
         return $html;
+    }
+
+    //for admin
+    public function getLastChatByUserUuid($userUuid)
+    {
+        $userId = auth()->user()->uuid;
+        $lastChat = Chat::whereFromUserUuid($userUuid)->whereToUserUuid($userId)->latest()->first();
+        return response()->json([
+            'status' => 'success',
+            'data' => $lastChat
+        ]);
+    }
+
+    public function showChatByUserUuid($userUuid)
+    {
+        $userId = auth()->user()->uuid;
+        $allChat = Chat::where('from_user_uuid', $userId)
+            ->orWhere('from_user_uuid', $userUuid)
+            ->with(["fromUser", "toUser"])
+            ->orderBy('created_at', 'asc')
+            ->get();
+
+        //get message from userUuid to admin
+        $allChatToAdmin = Chat::whereFromUserUuid($userUuid)->get();
+        //merge all chat
+        $allChat = $allChat->merge($allChatToAdmin);
+        //get admin chat with all users
+        $allChatWithAdmin = Chat::whereToUserUuid($userId)->with(["fromUser", "toUser"])->orderBy('created_at', 'asc')->get()->unique('from_user_uuid');
+        $getUserName = User::whereUuid($userUuid)->first()->name;
+
+        return view('admin.chat.index', compact(['allChat', 'userUuid', 'allChatWithAdmin', 'getUserName']));
+    }
+
+    public function adminSendMessage(Request $request)
+    {
+        $userId = auth()->user()->uuid;
+        $chat = Chat::create([
+            'from_user_uuid' => $userId,
+            'to_user_uuid' => $request->user_uuid,
+            'message' => $request->message
+        ]);
+
+        return response()->json([
+            'status' => 'success',
+            'data' => $chat
+        ]);
     }
 }
