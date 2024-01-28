@@ -52,9 +52,18 @@ class ProductRepository
         return $this->product->count();
     }
 
-    public function getAllProducts(): Collection
+    public function getAllProducts($filter): Collection
     {
-        return $this->product->get();
+        if ($filter == 'best-seller') {
+            //get best seller products based on order count
+            return $this->product->with('category')->withCount('orderDetail')->orderBy('order_detail_count', 'desc')->get();
+        }
+
+        return $this->product->with('category')->orderBy('name', 'desc')->get();
     }
 
+    public function search($search): Collection
+    {
+        return $this->product->with('category')->where('name', 'like', '%' . $search . '%')->get();
+    }
 }

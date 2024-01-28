@@ -15,7 +15,14 @@ class CategoryController extends Controller
     public function __invoke()
     {
         $categories = $this->categoryService->categoryLists();
-        $products = $this->productService->getAllProducts();
+        $request = request();
+        $products = $this->productService->getAllProducts("all");
+        if ($request->has('filter')) {
+            $products = $this->productService->getAllProducts($request->filter);
+        }
+        if ($request->has('search')) {
+            $products = $this->productService->search($request->search);
+        }
         return view('user.pages.category', compact('categories', 'products'));
     }
 }

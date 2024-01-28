@@ -28,11 +28,6 @@ class Product extends Model
         return $this->belongsTo(Category::class, 'category_uuid', 'uuid');
     }
 
-    public function orders(): BelongsTo
-    {
-        return $this->belongsTo(Order::class, 'product_uuid', 'uuid');
-    }
-
     public function getRupiahPriceAttribute(): string
     {
         return "Rp " . number_format($this->price,2,',','.');
@@ -45,6 +40,6 @@ class Product extends Model
 
     public function orderDetail(): BelongsTo
     {
-        return $this->belongsTo(OrderDetail::class, 'product_uuid', 'uuid');
+        return $this->belongsTo(OrderDetail::class, 'uuid', 'product_uuid');
     }
 }
