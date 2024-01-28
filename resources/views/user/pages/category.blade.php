@@ -29,13 +29,18 @@
         <!-- #region Products -->
         <div class="col-span-3">
             <div class="flex items-center mb-4">
-                <select name="sort" id="sort"
-                        class="w-44 text-sm text-gray-600 py-3 px-4 border-gray-300 shadow-sm focus:ring-primary focus:border-primary">
-                    <option value="">Default sorting</option>
-                    <option value="price-low-to-high">Price low to high</option>
-                    <option value="price-high-to-low">Price high to low</option>
-                    <option value="latest">Latest product</option>
-                </select>
+                <form method="GET" action="{{route('product.category')}}">
+                    <select name="filter" id="filter"
+                            class="w-44 text-sm text-gray-600 py-3 px-4 border-gray-300 shadow-sm focus:ring-primary focus:border-primary">
+                        <option value="all">Default sorting</option>
+                        <option value="best-seller">Penjualan terbanyak</option>
+                    </select>
+                    <button type="submit"
+                        class="mr-3 ml-3 btn btn-success">
+                        <i class="gg-filter"></i>
+                        Filter
+                    </button>
+                </form>
 
                 <div class="flex gap-2 ml-auto">
                     <div

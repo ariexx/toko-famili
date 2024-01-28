@@ -10,6 +10,7 @@
                     <h5 class="card-title mb-0">Table</h5>
                 </div>
                 <div class="card-body">
+                    <a class="btn btn-outline-success" href="{{route('admin.export')}}">Export</a>
                     <table class="table">
                         <thead>
                         <tr>

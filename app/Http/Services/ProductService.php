@@ -11,9 +11,9 @@ class ProductService
     {
     }
 
-    public function getAllProducts(): array|\Illuminate\Database\Eloquent\Collection
+    public function getAllProducts($filter): array|\Illuminate\Database\Eloquent\Collection
     {
-        return $this->productRepository->getAllProducts();
+        return $this->productRepository->getAllProducts($filter);
     }
 
     public function productLists()
@@ -67,5 +67,10 @@ class ProductService
     public function totalProducts()
     {
         return $this->productRepository->totalProducts();
+    }
+
+    public function search($search): Collection
+    {
+        return $this->productRepository->search($search);
     }
 }

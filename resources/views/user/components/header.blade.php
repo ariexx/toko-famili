@@ -53,9 +53,11 @@
                         <i class="gg-search"></i>
                     </span>
 
+                <form action="{{route('product.category')}}" method="GET">
                 <input
                     class="pl-10 block w-full border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
-                    type="text" placeholder="Search">
+                    type="text" name="search" placeholder="Search">
+                </form>
             </div>
         </div>
     </header>

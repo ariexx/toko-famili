@@ -3,6 +3,7 @@
 namespace App\Http\Repository;
 
 use App\Models\Order;
+use Maatwebsite\Excel\Excel;
 
 class OrderRepository
 {
@@ -36,5 +37,12 @@ class OrderRepository
             ->groupBy('date')
             ->orderBy('date', 'ASC')
             ->get();
+    }
+
+    public function export()
+    {
+        $orders = $this->order->with(['orderDetails', 'orderDetails.product', 'users'])->get();
+
+        return \Maatwebsite\Excel\Excel::download(new \App\Exports\OrderExport($orders), 'orders.xlsx');
     }
 }
