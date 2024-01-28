@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Exports\OrdersExport;
 use App\Http\Controllers\Controller;
 use App\Http\Services\OrderService;
 use App\Http\Services\ProductService;
-
+use Maatwebsite\Excel\Facades\Excel;
 class AdminController extends Controller
 {
     public function __construct
@@ -36,5 +37,10 @@ class AdminController extends Controller
             'orderLists',
             'chartData',
         ));
+    }
+
+    public function export()
+    {
+        return Excel::download(new OrdersExport, 'orders.xlsx');
     }
 }

@@ -44,4 +44,9 @@ class OrderService
         return $data;
     }
 
+    public function export()
+    {
+        return $this->orderRepository->export();
+    }
+
 }
